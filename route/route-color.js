@@ -1,16 +1,14 @@
 'use strict';
 
-import bodyParser from 'body-parser';
+const bodyParser = require('body-parser').json();
 
-import Color from '../model/color';
-import { log } from '../lib/utils';
-import errorHandler from '../middleware/error-handler';
-
-bodyParser = bodyParser.json();
+const Color = require('../model/color');
+const { log } = require('../lib/utils');
+const errorHandler = require('../middleware/error-handler');
 
 module.exports = function(router) {
   router.route('/color/:_id?')
-    .post((request, response) => {
+    .post(bodyParser, (request, response) => {
       log('__ROUTE_POST_COLOR');
       // Model.insertMany(doc)
       // .then(send response)

@@ -9,8 +9,8 @@ describe('Color Model', function() {
     it('should create an object', () => {
       expect(newColor).toBeInstanceOf(Object);
     });
-    it('Should have a hex property', () => {
-      expect(newColor).toHaveProperty('hex');
-    });
+    // it('Should have a hex property', () => {
+    //   expect(newColor).toHaveProperty('hex');
+    // });
   });
 });
