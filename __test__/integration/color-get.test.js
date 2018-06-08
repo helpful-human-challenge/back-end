@@ -1,10 +1,10 @@
 'use strict';
 
 const superagent = require('superagent');
-require('jest');
-
 const mocks = require('../lib/mocks');
 const server = require('../../lib/server');
+require('jest');
+
 
 const PORT = process.env.PORT;
 const COLOR_ENDPOINT = `:${PORT}/api/v1/color`;
@@ -17,14 +17,32 @@ describe('GET /api/v1/color', function() {
   describe('Valid Route', () => {
     it('should get color objects', () => {
       return mocks.color.createOne()
-        .then(color => this.mockColor = color)
+        .then(mockColor => this.mockColor = mockColor)
+        .then(x => superagent.get(COLOR_ENDPOINT)
+          .then(response => {
+            expect(response.status).toEqual(200);
+          }));
+    });
+    it('should get a single color', () => {
+      let newMock;
+      return mocks.color.createOne()
+        .then(x => newMock = x)
         .then(() => {
-          superagent.get(`${COLOR_ENDPOINT}`)
+          return superagent.get(`${COLOR_ENDPOINT}/${newMock.color._id}`)
             .then(response => {
               expect(response.status).toEqual(200);
-              console.log(response);
             });
         });
+    });
+  });
+  describe('Invalid Route', () => {
+    it('should return 404 not found for invalid path', () => {
+      return superagent.get(':4000/api/v1/colors')
+        .catch(error => expect(error.status).toEqual(404));
+    });
+    it('should return 404 not found for invalid path', () => {
+      return superagent.get(`${COLOR_ENDPOINT}/1234`)
+        .catch(error => expect(error.status).toEqual(404));
     });
   });
 });
