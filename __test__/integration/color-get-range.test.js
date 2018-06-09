@@ -26,4 +26,10 @@ describe('GET RANGE', function() {
         });
     });
   });
+  describe('Invalid Route', () => {
+    it('should return 404 not found', () => {
+      return superagent.get(`${RANGE_ENDPOINT}/notacolor`)
+        .catch(error => expect(error.status).toEqual(404));
+    });
+  });
 });
