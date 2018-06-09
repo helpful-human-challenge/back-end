@@ -12,13 +12,13 @@ const COLOR_ENDPOINT = `:${PORT}/api/v1/color`;
 describe('GET /api/v1/color', function() {
   beforeAll(() => server.start(PORT, () => console.log(`Listening on ${PORT}`)));
   afterAll(() => server.stop());
-  afterAll(mocks.color.removeAll);
+  afterEach(mocks.color.removeAll);
 
   describe('Valid Route', () => {
     it('should get color objects', () => {
       return mocks.color.createOne()
         .then(mockColor => this.mockColor = mockColor)
-        .then(x => superagent.get(COLOR_ENDPOINT)
+        .then(() => superagent.get(COLOR_ENDPOINT)
           .then(response => {
             expect(response.status).toEqual(200);
           }));

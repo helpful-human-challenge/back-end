@@ -28,14 +28,4 @@ module.exports = function(router) {
         })
         .catch(error => errorHandler(error, response));
     });
-  router.route('/color/:range?')
-    .get((request, response) => {
-      if(request.params.range) {
-        return Color.find({
-          colorRange: request.params.range,
-        })
-          .then(colors => response.status(200).json(colors))
-          .catch(error => errorHandler(error, response));
-      }
-    });
 };
