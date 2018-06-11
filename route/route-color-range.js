@@ -1,8 +1,11 @@
 'use strict';
 
+const bodyParser = require('body-parser').json();
+
 const Color = require('../model/color');
 const { log } = require('../lib/utils');
 const errorHandler = require('../middleware/error-handler');
+const colors = require('../lib/colors');
 
 module.exports = function(router) {
   router.route('/range/:color?')
