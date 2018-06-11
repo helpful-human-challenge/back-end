@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Color = mongoose.Schema({
   hex: {
     type: String,
+    unique: true,
   },
   rgb: {
     type: String,
