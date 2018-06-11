@@ -24,7 +24,8 @@
     "collectCoverage": true,
     "coverageDirectory": "./coverage",
     "coveragePathIgnorePatterns": [
-      "/__test__/"
+      "/__test__/",
+      "/lib/color"
     ],
     "coverageThreshold": {
       "global": {
